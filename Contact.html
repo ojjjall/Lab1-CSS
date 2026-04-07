@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Contact Lauza Amru Kasyafa — send a message or enquiry.">
+  <title>Contact | Lauza Amru Kasyafa</title>
+</head>
+<body>
+
+  <header style="background-color: #1a1a2e; color: #eaeaea; padding: 30px 40px; text-align: center;">
+    <h1>Lauza Amru Kasyafa</h1>
+    <p><em>Contact Me</em></p>
+  </header>
+
+  <nav style="background-color: #16213e; padding: 12px 40px;">
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 20px;">
+      <li><a href="index.html"    style="color: #e94560; text-decoration: none;">Home</a></li>
+      <li><a href="about.html"    style="color: #e94560; text-decoration: none;">About</a></li>
+      <li><a href="skills.html"   style="color: #e94560; text-decoration: none;">Skills</a></li>
+      <li><a href="academic.html" style="color: #e94560; text-decoration: none;">Academic</a></li>
+      <li><a href="projects.html" style="color: #e94560; text-decoration: none;">Projects</a></li>
+    </ul>
+  </nav>
+
+  <main style="max-width: 960px; margin: 0 auto; padding: 30px 20px;">
+
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <p>Fill in the form below and I will get back to you as soon as possible.</p>
+
+      <!--
+        FORM NOTES:
+        - action="#" sends the form back to the same page (placeholder — no server-side processing).
+        - method="post" sends form data in the HTTP request body (not visible in URL).
+        - Every input is linked to a <label for="..."> using matching id attributes.
+        - The inline style attribute is used throughout to demonstrate CSS properties:
+          color, background-color, font-size, border, and padding.
+      -->
+      <form action="#" method="post">
+
+        <!-- ===== FIELDSET 1: Personal Information ===== -->
+        <fieldset style="border: 2px solid #1a1a2e; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+          <legend style="font-size: 1.1em; font-weight: bold; color: #1a1a2e; padding: 0 8px;">
+            Personal Information
+          </legend>
+
+          <!-- Full Name -->
+          <div style="margin-bottom: 14px;">
+            <label for="fullname" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Full Name <span style="color: red;">*</span>
+            </label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="e.g. Lauza Amru Kasyafa"
+              required
+              maxlength="60"
+              style="border: 2px solid navy; padding: 6px 10px; font-size: 14px; width: 100%; box-sizing: border-box;">
+          </div>
+
+          <!-- Email -->
+          <div style="margin-bottom: 14px;">
+            <label for="email" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Email Address <span style="color: red;">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="yourname@example.com"
+              required
+              maxlength="100"
+              style="border: 2px solid navy; padding: 6px 10px; font-size: 14px; width: 100%; box-sizing: border-box;">
+          </div>
+
+          <!-- Phone -->
+          <div style="margin-bottom: 14px;">
+            <label for="phone" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+62 852-8113-4758"
+              maxlength="20"
+              style="border: 2px solid navy; padding: 6px 10px; font-size: 14px; width: 100%; box-sizing: border-box;">
+          </div>
+
+          <!-- Age (number) -->
+          <div style="margin-bottom: 14px;">
+            <label for="age" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Age
+            </label>
+            <input
+              type="number"
+              id="age"
+              name="age"
+              placeholder="e.g. 20"
+              min="16"
+              max="99"
+              style="border: 2px solid navy; padding: 6px 10px; font-size: 14px; width: 120px;">
+          </div>
+
+          <!-- Date of Birth -->
+          <div style="margin-bottom: 14px;">
+            <label for="dob" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Date of Birth
+            </label>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              min="1980-01-01"
+              max="2008-12-31"
+              style="border: 2px solid navy; padding: 6px 10px; font-size: 14px;">
+          </div>
+        </fieldset>
+
+        <!-- ===== FIELDSET 2: Enquiry Details ===== -->
+        <fieldset style="border: 2px solid #1a1a2e; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+          <legend style="font-size: 1.1em; font-weight: bold; color: #1a1a2e; padding: 0 8px;">
+            Enquiry Details
+          </legend>
+
+          <!-- Subject (select with optgroup) -->
+          <div style="margin-bottom: 14px;">
+            <label for="subject" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Subject <span style="color: red;">*</span>
+            </label>
+            <select
+              id="subject"
+              name="subject"
+              required
+              style="border: 2px solid navy; padding: 6px 10px; font-size: 14px; width: 100%; background-color: #f9f9f9;">
+              <option value="">— Please select a subject —</option>
+              <optgroup label="Collaboration">
+                <option value="project">Project Collaboration</option>
+                <option value="freelance">Freelance Enquiry</option>
+                <option value="internship">Internship Opportunity</option>
+              </optgroup>
+              <optgroup label="Academic">
+                <option value="study">Study Group</option>
+                <option value="tutoring">Tutoring Request</option>
+              </optgroup>
+              <optgroup label="HOLO SHOP">
+                <option value="holoshop-demo">HOLO SHOP Demo Request</option>
+                <option value="holoshop-collab">HOLO SHOP Collaboration</option>
+              </optgroup>
+              <optgroup label="General">
+                <option value="feedback">Feedback</option>
+                <option value="other">Other</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Priority (range) -->
+          <div style="margin-bottom: 14px;">
+            <label for="priority" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Priority Level (1 = Low, 10 = Urgent)
+            </label>
+            <input
+              type="range"
+              id="priority"
+              name="priority"
+              min="1"
+              max="10"
+              value="5"
+              style="width: 100%;">
+          </div>
+
+          <!-- Message (textarea) -->
+          <div style="margin-bottom: 14px;">
+            <label for="message" style="display: block; font-weight: bold; margin-bottom: 4px; color: #1a1a2e;">
+              Message <span style="color: red;">*</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              placeholder="Write your message here..."
+              required
+              maxlength="1000"
+              style="border: 2px solid navy; padding: 8px 10px; font-size: 14px; width: 100%; box-sizing: border-box; resize: vertical; background-color: #fefefe;">
+            </textarea>
+          </div>
+        </fieldset>
+
+        <!-- ===== FIELDSET 3: Interests (Checkboxes) ===== -->
+        <fieldset style="border: 2px solid #1a1a2e; border-radius: 8px; padding: 20px; margin-bottom: 24px; background-color: #f7f7f7;">
+          <legend style="font-size: 1.1em; font-weight: bold; color: #1a1a2e; padding: 0 8px;">
+            Topics You Are Interested In
+          </legend>
+          <p style="margin: 0 0 10px 0; font-size: 0.9em; color: #555;">Select all that apply.</p>
+
+          <div style="margin-bottom: 8px;">
+            <input type="checkbox" id="interest-web"    name="interests" value="web">
+            <label for="interest-web">Web Development</label>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <input type="checkbox" id="interest-3d"     name="interests" value="3d">
+            <label for="interest-3d">3D / Augmented Reality Shopping</label>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <input type="checkbox" id="interest-mobile" name="interests" value="mobile">
+            <label for="interest-mobile">Mobile App Development</label>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <input type="checkbox" id="interest-db"     name="interests" value="database">
+            <label for="interest-db">Database &amp; Back-End Systems</label>
+          </div>
+        </fieldset>
+
+        <!-- ===== FIELDSET 4: Preferred Contact Method (Radio Buttons) ===== -->
+        <fieldset style="border: 2px solid #1a1a2e; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+          <legend style="font-size: 1.1em; font-weight: bold; color: #1a1a2e; padding: 0 8px;">
+            Preferred Contact Method
+          </legend>
+
+          <!-- All three radios share the same name="contact_method" for correct grouping -->
+          <div style="margin-bottom: 8px;">
+            <input type="radio" id="contact-email"    name="contact_method" value="email" checked>
+            <label for="contact-email">Email</label>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <input type="radio" id="contact-phone"    name="contact_method" value="phone">
+            <label for="contact-phone">Phone Call</label>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <input type="radio" id="contact-whatsapp" name="contact_method" value="whatsapp">
+            <label for="contact-whatsapp">WhatsApp</label>
+          </div>
+        </fieldset>
+
+        <!-- Submit / Reset Buttons -->
+        <div style="text-align: center;">
+          <button
+            type="submit"
+            style="background-color: #e94560; color: #ffffff; font-size: 16px; padding: 12px 40px; border: none; border-radius: 6px; cursor: pointer;">
+            Send Message
+          </button>
+          <button
+            type="reset"
+            style="background-color: #aaaaaa; color: #ffffff; font-size: 16px; padding: 12px 40px; border: none; border-radius: 6px; cursor: pointer; margin-left: 12px;">
+            Clear Form
+          </button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <footer style="background-color: #1a1a2e; color: #eaeaea; padding: 20px 40px; text-align: center; margin-top: 40px;">
+    <address style="font-style: normal;">
+      <strong>Lauza Amru Kasyafa</strong><br>
+      Email: <a href="mailto:lauza@graduate.utm.my" style="color: #e94560;">lauza@graduate.utm.my</a><br>
+      Phone: +62 852-8113-4758<br>
+      Taman Mutiara Rini, Johor, Malaysia
+    </address>
+    <p><small>&copy; 2025 Lauza Amru Kasyafa. All rights reserved.</small></p>
+  </footer>
+
+</body>
+</html>
