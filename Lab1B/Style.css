@@ -1,0 +1,868 @@
+/* ============================================
+   style.css — Lauza Amru Kasyafa Portfolio
+   SCSM2223 Lab 1B — CSS Styling & Layout
+
+   BREAKPOINTS (mobile-first)
+   base (mobile):  320px and up  (default)
+   tablet:         @media (min-width: 600px)
+   desktop:        @media (min-width: 1024px)
+============================================ */
+
+/* ============================================
+   TASK 1 — CSS ARCHITECTURE & CUSTOM PROPERTIES
+   :root design token system
+============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  /* Primary colours */
+  --color-primary:    #1a1a2e;
+  --color-secondary:  #16213e;
+
+  /* Accent colours */
+  --color-accent:     #e94560;
+  --color-accent-soft:#e8d5b7;
+
+  /* Neutral greys */
+  --color-grey-light: #f5f4f0;
+  --color-grey-mid:   #cccccc;
+  --color-grey-dark:  #666666;
+
+  /* Text & surface */
+  --color-text:       #1a1a1a;
+  --color-text-light: #eaeaea;
+  --color-surface:    #ffffff;
+  --color-surface-alt:#f5f4f0;
+
+  /* Typography */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'Lora', Georgia, serif;
+
+  /* Spacing scale */
+  --space-xs:   0.4rem;
+  --space-sm:   0.8rem;
+  --space-md:   1.6rem;
+  --space-lg:   3.2rem;
+  --space-xl:   6.4rem;
+
+  /* Border radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-full:50%;
+
+  /* Shadows */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.10);
+  --shadow-nav:  0 2px 12px rgba(0,0,0,0.18);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+}
+
+/* ============================================
+   CSS RESET
+============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* 62.5% base → 1rem = 10px */
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+img {
+  /* Task 5 — responsive images */
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   TASK 2 — TYPOGRAPHY, COLOUR & BOX MODEL
+============================================ */
+
+/* --- Typographic scale (rem units) --- */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  line-height: 1.2;
+  /* margin pushes space OUTSIDE the element */
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+}
+
+h1 { font-size: 4.2rem; }
+h2 { font-size: 3.2rem; }
+h3 { font-size: 2.4rem; }
+h4 { font-size: 2.0rem; }
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  /* margin separates paragraphs from siblings */
+  margin: 0 0 var(--space-md) 0;
+}
+
+small {
+  font-size: 1.2rem;
+  color: var(--color-grey-dark);
+  line-height: 1.5;
+}
+
+code {
+  font-size: 1.4rem;
+  background-color: var(--color-grey-light);
+  color: var(--color-accent);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-family: 'Courier New', monospace;
+}
+
+caption {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.4;
+  caption-side: top;
+  /* padding adds space INSIDE the caption */
+  padding: var(--space-sm) 0 var(--space-sm) 0;
+}
+
+/* --- Landmark backgrounds, padding, color --- */
+
+/* COMMENT: header uses padding (not margin) to push text away from
+   its own edges inward. Margin would push it away from siblings. */
+header {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+header h1 {
+  color: var(--color-text-light);
+  margin-bottom: var(--space-xs);
+}
+
+header p {
+  color: var(--color-accent-soft);
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+/* COMMENT: nav uses padding for inner breathing room and box-shadow
+   for depth. No margin needed — sticky positioning controls placement. */
+nav {
+  background-color: var(--color-secondary);
+  padding: var(--space-sm) var(--space-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-nav);
+}
+
+/* COMMENT: main uses margin:auto for centering and padding for inner
+   content breathing room — these serve different purposes. */
+main {
+  max-width: 96rem;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+/* COMMENT: footer uses padding (inner spacing) and margin-top to
+   push it away from the content above. */
+footer {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+
+footer address {
+  font-style: normal;
+  line-height: 2;
+  font-size: 1.5rem;
+  color: var(--color-text-light);
+}
+
+footer p {
+  color: var(--color-grey-mid);
+  font-size: 1.2rem;
+  margin: var(--space-sm) 0 0 0;
+}
+
+/* --- Links — all four states --- */
+
+/* :link — unvisited */
+a:link {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* :visited — already clicked */
+a:visited {
+  color: #b03050;
+}
+
+/* :hover — mouse over */
+a:hover {
+  color: var(--color-accent-soft);
+  text-decoration: underline;
+}
+
+/* :active — being clicked right now */
+a:active {
+  color: var(--color-accent-soft);
+  opacity: 0.75;
+}
+
+/* --- Blockquote — Task 6 ::before pseudo-element --- */
+
+/* COMMENT: blockquote uses padding (inner space) + border (visual marker).
+   Margin creates separation from surrounding paragraphs. */
+blockquote {
+  border-left: 4px solid var(--color-accent);
+  margin: var(--space-md) 0;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface-alt);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  position: relative;
+}
+
+/* Decorative opening quote mark */
+blockquote::before {
+  content: '\201C';
+  font-family: var(--font-heading);
+  font-size: 8rem;
+  color: var(--color-accent);
+  opacity: 0.2;
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  line-height: 1;
+}
+
+blockquote p {
+  font-style: italic;
+  font-size: 1.7rem;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-xs) 0;
+}
+
+blockquote cite {
+  font-size: 1.4rem;
+  color: var(--color-grey-dark);
+}
+
+/* --- Section spacing --- */
+section {
+  margin-bottom: var(--space-lg);
+}
+
+/* --- Section headings — ::after decorative accent bar (Task 6) --- */
+section h2 {
+  position: relative;
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+section h2::after {
+  content: '';
+  display: block;
+  width: 5rem;
+  height: 4px;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-xs);
+}
+
+/* --- mark highlight --- */
+mark {
+  background-color: rgba(233, 69, 96, 0.15);
+  color: var(--color-primary);
+  padding: 0 var(--space-xs);
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   TASK 3 — NAVIGATION & HEADER WITH FLEXBOX
+============================================ */
+
+.nav-inner {
+  max-width: 96rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.nav-brand {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-text-light);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-brand:link,
+.nav-brand:visited {
+  color: var(--color-text-light);
+}
+
+.nav-brand:hover {
+  color: var(--color-accent-soft);
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-sm);
+  align-items: center;
+}
+
+.nav-links a {
+  display: inline-block;
+  color: var(--color-grey-mid);
+  text-decoration: none;
+  font-size: 1.4rem;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  /* Task 3 transition requirement */
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:link,
+.nav-links a:visited {
+  color: var(--color-grey-mid);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--color-text-light);
+  background-color: rgba(255,255,255,0.08);
+  text-decoration: none;
+}
+
+/* Active page link — coloured bottom border */
+.nav-links a.active {
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* --- Header Flexbox (two-column: text left, image right) --- */
+.header-inner {
+  max-width: 96rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.header-text { flex: 1; }
+
+.header-avatar img {
+  width: 12rem;
+  height: 12rem;
+  border-radius: var(--radius-full);
+  border: 4px solid var(--color-accent);
+  object-fit: cover;
+}
+
+/* ============================================
+   TASK 4 — PAGE LAYOUT WITH CSS GRID
+============================================ */
+
+/* --- Card grid on index.html (base: 1 column) --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+/* Individual cards */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-grey-mid);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-card);
+  /* equal height rows */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* Task 4 — lift on hover */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+}
+
+.card h3 {
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+}
+
+.card p {
+  color: var(--color-grey-dark);
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.card .card-tag {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  font-size: 1.2rem;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+/* Featured card spans full width */
+.card-featured {
+  grid-column: span 2;
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.card-featured h3,
+.card-featured p {
+  color: var(--color-text-light);
+}
+
+/* --- Two-column sidebar layout (about.html / skills.html) --- */
+.page-with-sidebar {
+  display: grid;
+  grid-template-columns: 1fr;   /* mobile: single column */
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.sidebar {
+  background-color: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-card);
+}
+
+.sidebar h3 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  font-size: 1.4rem;
+  padding: var(--space-xs) 0;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-grey-mid);
+}
+
+/* Task 6: remove border on first and last sidebar list items */
+.sidebar ul li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.sidebar ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ============================================
+   TASK 5 — RESPONSIVE DESIGN (mobile-first)
+============================================ */
+
+/* Base styles already target mobile above.
+   Enhancements below for wider viewports. */
+
+/* --- Tablet: 600px+ --- */
+@media (min-width: 600px) {
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-inner {
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+  }
+
+  .header-avatar img {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  h1 { font-size: 5rem; }
+}
+
+/* --- Desktop: 1024px+ --- */
+@media (min-width: 1024px) {
+
+  /* Full 3-column card grid */
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+  }
+
+  /* Sidebar layout activates on desktop */
+  .page-with-sidebar {
+    grid-template-columns: 1fr 28rem;
+  }
+
+  h1 { font-size: 5.6rem; }
+
+  nav { padding: var(--space-sm) var(--space-lg); }
+
+  main { padding: var(--space-lg) var(--space-xl); }
+}
+
+/* ============================================
+   LISTS
+============================================ */
+
+ul, ol {
+  padding-left: var(--space-lg);
+  margin: 0 0 var(--space-md) 0;
+}
+
+li {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-xs);
+  color: var(--color-text);
+}
+
+/* Task 6: first/last-child border handling on nav list */
+.nav-links > li:first-child > a {
+  padding-left: 0;
+}
+
+/* Description list */
+dl {
+  margin: 0 0 var(--space-md) 0;
+}
+
+dt {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: var(--space-sm);
+}
+
+dd {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin: var(--space-xs) 0 var(--space-sm) var(--space-lg);
+  line-height: 1.7;
+}
+
+/* ============================================
+   TABLES (academic.html)
+============================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-lg);
+  font-size: 1.4rem;
+}
+
+thead {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+thead th {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+}
+
+tbody td, tbody th {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-grey-mid);
+  color: var(--color-text);
+  font-size: 1.4rem;
+}
+
+tbody th {
+  background-color: var(--color-surface-alt);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Task 6 — alternating row colours */
+tbody tr:nth-child(even) {
+  background-color: var(--color-grey-light);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--color-surface);
+}
+
+tbody tr:hover {
+  background-color: rgba(233, 69, 96, 0.06);
+}
+
+tfoot td {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface-alt);
+  font-size: 1.4rem;
+  border-top: 2px solid var(--color-primary);
+}
+
+/* ============================================
+   FIGURES & IMAGES (projects.html)
+============================================ */
+
+figure {
+  margin: 0 0 var(--space-md) 0;
+}
+
+figcaption {
+  font-size: 1.3rem;
+  color: var(--color-grey-dark);
+  margin-top: var(--space-xs);
+  font-style: italic;
+}
+
+.project-hero img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-accent);
+}
+
+.profile-photo img {
+  border-radius: var(--radius-full);
+  border: 4px solid var(--color-accent);
+  width: 18rem;
+  height: 18rem;
+  object-fit: cover;
+  margin: 0 auto var(--space-md);
+}
+
+/* Float image beside paragraph (legacy align replaced with CSS) */
+.float-right {
+  float: right;
+  margin: 0 0 var(--space-md) var(--space-md);
+  max-width: 32rem;
+}
+
+.float-right figcaption {
+  text-align: right;
+}
+
+/* Clearfix */
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* ============================================
+   TASK 6 — FORM STYLING & VISUAL POLISH
+============================================ */
+
+/* --- Form layout --- */
+form {
+  max-width: 72rem;
+}
+
+fieldset {
+  border: 2px solid var(--color-grey-mid);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+legend {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  padding: 0 var(--space-sm);
+}
+
+/* --- Labels --- */
+label {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+/* --- Inputs, textarea, select --- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-grey-mid);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-sizing: border-box;
+}
+
+/* Task 6 — visible :focus state with accent shadow */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--color-accent);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 12rem;
+}
+
+/* Form group spacing */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+/* Checkbox & radio rows */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.form-check label {
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.form-check input {
+  width: auto;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.btn-primary:hover {
+  background-color: #c73250;
+}
+
+/* Task 6 — scale down on :active */
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background-color: var(--color-grey-mid);
+  color: var(--color-text);
+}
+
+.btn-secondary:hover {
+  background-color: #aaaaaa;
+}
+
+.btn-group {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+}
+
+/* ============================================
+   UTILITY CLASSES
+============================================ */
+
+.text-center  { text-align: center; }
+.text-right   { text-align: right; }
+.mt-sm        { margin-top: var(--space-sm); }
+.mt-md        { margin-top: var(--space-md); }
+.mt-lg        { margin-top: var(--space-lg); }
+.mb-0         { margin-bottom: 0; }
+.required-star { color: var(--color-accent); }
+
+/* ============================================
+   ABBR & DFN
+============================================ */
+
+abbr[title] {
+  text-decoration: underline dotted var(--color-grey-dark);
+  cursor: help;
+}
+
+dfn {
+  font-style: italic;
+  color: var(--color-primary);
+  font-weight: 600;
+}
